@@ -41,12 +41,18 @@ public class EmployeeController {
        return employeeService.deleteEmployeeById(empId);
     }
 
-    //5 Update single
+    //5 Get Sorted Employee on id basis ASC/DESC
+    @GetMapping("/sortedById")
+    public List<EmployeeDto> getSortedEmployeesById(@RequestParam String sortDir){
+       return employeeService.fetchSortedEmployeesById(sortDir);
 
+    }
 
+    //6 Get sorted employee based on any field
+    @GetMapping("sorted")
+    public List<EmployeeDto> getSortedEmployees(@RequestParam String sortBy , @RequestParam String sortDir){
+       return employeeService.fetchSortedEmployeesByAnyField(sortBy,sortDir);
+    }
 
-
-
-    
 
 }

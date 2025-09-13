@@ -15,5 +15,8 @@ public interface EmployeeService {
     List<EmployeeDto> getAllEmployee();
     EmployeeDto getEmployeeById(int empId);
     String deleteEmployee(int empId);
+    List<EmployeeDto> fetchSortedEmployeesById(String sortDir);
+    List<EmployeeDto> fetchSortedEmployeesByAnyField(String sortBy,String sortDir);
+
 
 }

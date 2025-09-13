@@ -6,7 +6,10 @@ import com.employeeManagement.EmployeeManagement.model.entities.Employee;
 import com.employeeManagement.EmployeeManagement.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +67,46 @@ public class EmployeeServiceImpl {
 
     }
 
+    //5 Sort by id asc/desc
+    public List<EmployeeDto> fetchSortedEmployeesById(String sortDir){
+        List<Employee> employeeList = new ArrayList<>();
+        if(sortDir.equalsIgnoreCase("asc"))
+        {
+            employeeList  = employeeRepository.findAllByOrderByEmpIdAsc();
 
+        }else{
+           employeeList = employeeRepository.findAllByOrderByEmpIdDesc();
 
+        }
+       List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        for(Employee e : employeeList){
+           employeeDtoList.add(modelMapper.map(e,EmployeeDto.class));
+       }
+        return employeeDtoList;
+    }
+
+    //6 sort by any field
+    //create Sort obj first
+    public List<EmployeeDto> fetchSortedEmployeesByAnyField(String sortBy, String sortDir){
+        // validate the sorting field
+        List<String> allowedFields = List.of("empId","empName","salary");
+        if(!allowedFields.contains(sortBy)) {
+            throw new IllegalArgumentException("Invalid sort field for sorting :"+sortBy);
+        }
+        // decide the sorting direction
+        Sort.Direction direction = Sort.Direction.ASC;
+        if(sortDir.equalsIgnoreCase("desc")){
+            direction = Sort.Direction.DESC;
+        }
+        // create Sort object
+        Sort sort = Sort.by(direction,sortBy);
+        List<Employee> employeeList = employeeRepository.findAll(sort);
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        for (Employee e : employeeList){
+            employeeDtoList.add(modelMapper.map(e,EmployeeDto.class));
+        }
+    return employeeDtoList;
+    }
 
 }
 
