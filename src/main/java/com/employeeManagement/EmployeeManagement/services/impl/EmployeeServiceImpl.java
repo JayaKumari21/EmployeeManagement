@@ -1,0 +1,71 @@
+package com.employeeManagement.EmployeeManagement.services.impl;
+
+import com.employeeManagement.EmployeeManagement.dto.EmployeeDto;
+import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundException;
+import com.employeeManagement.EmployeeManagement.model.entities.Employee;
+import com.employeeManagement.EmployeeManagement.repositories.EmployeeRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EmployeeServiceImpl {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+   @Autowired
+   private ModelMapper modelMapper;
+
+    //1 Adding/inserting
+    public String addEmployee(EmployeeDto employeeDto){
+        if(employeeRepository.findById(employeeDto.getEmpId()).isPresent()){
+            return "Employee with id "+employeeDto.getEmpId()+" is already present";
+        }
+        Employee employee = modelMapper.map(employeeDto ,Employee.class);
+        employeeRepository.save(employee);
+        return "Employee added successfully";
+    }
+
+    // 2 Get all employee
+    public List<EmployeeDto> getAllEmployee(){
+        List<Employee> list = employeeRepository.findAll();
+        if(list.isEmpty()){
+            throw new ResourceNotFoundException("No employee found : Empty Table");
+        }
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        for(Employee e : list){
+            employeeDtoList.add(modelMapper.map(e,EmployeeDto.class));
+        }
+
+        return employeeDtoList;
+    }
+
+    // 3 Get employee by id
+    public EmployeeDto getEmployeeById(int empId){
+        Employee employee = employeeRepository.findById(empId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee with id "+empId+" is not found"));
+        return modelMapper.map(employee , EmployeeDto.class);
+
+
+    }
+
+
+    //4 Delete Employee by id
+    public String deleteEmployeeById(int empId){
+        employeeRepository.findById(empId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee with id "+empId+" is not found"));
+        employeeRepository.deleteById(empId);
+        return "Employee Deleted successfully";
+
+    }
+
+
+
+
+}
+
