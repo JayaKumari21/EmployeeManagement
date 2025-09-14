@@ -6,21 +6,21 @@ import com.employeeManagement.EmployeeManagement.model.entities.Employee;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeService {
 
-    ResponseEntity<EmployeeDto> addEmployee();
+    EmployeeDto addEmployee();
 
-    ResponseEntity<List<EmployeeDto>> getAllEmployee();
-
-
-    ResponseEntity<EmployeeDto> getEmployeeById(int empId);
-
-    ResponseEntity<String> deleteEmployee(int empId);
-
-    List<EmployeeDto> fetchSortedEmployeesById(String sortDir);
-
-    List<EmployeeDto> fetchSortedEmployeesByAnyField(String sortBy, String sortDir);
+    List<EmployeeDto> getAllEmployee(String sortBy, String sortDir);
 
 
+    EmployeeDto getEmployeeById(int empId);
+
+    String deleteEmployee(int empId);
+
+
+//    ResponseEntity<EmployeeDto> updatePartialEmployee(Integer empId, Map<String, Object> updates);
+
+    EmployeeDto updateEmployee(Integer empId, EmployeeDto employeeDto);
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -35,8 +36,11 @@ public class EmployeeController {
 
     //2 Get all employee
     @GetMapping()
-    public ResponseEntity<List<EmployeeDto>> getAll() {
-        List<EmployeeDto> employeeDtoList = employeeService.getAllEmployee();
+    public ResponseEntity<List<EmployeeDto>> getAll(
+            @RequestParam(value = "sortBy", defaultValue = "empId", required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir) {
+        System.out.println("Value of sortBy in controller : " + sortBy);
+        List<EmployeeDto> employeeDtoList = employeeService.getAllEmployee(sortBy, sortDir);
         return new ResponseEntity<>(employeeDtoList, HttpStatus.OK);
     }
 
@@ -52,20 +56,13 @@ public class EmployeeController {
     public ResponseEntity<String> deleteEmployee(@PathVariable int empId) {
         return new ResponseEntity<>(employeeService.deleteEmployeeById(empId), HttpStatus.OK);
     }
-//-------------------------------------------------------------------------------------
+    
 
-    //5 Get Sorted Employee on id basis ASC/DESC
-    @GetMapping("/sortedById")
-    public List<EmployeeDto> getSortedEmployeesById(@RequestParam String sortDir) {
-        return employeeService.fetchSortedEmployeesById(sortDir);
+    // 5 Put :- Full
+    @PutMapping("/{empId}")
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Integer empId, @RequestBody EmployeeDto employeeDto) {
+        EmployeeDto updatedEmployee = employeeService.updateEmployee(empId, employeeDto);
+        return ResponseEntity.ok(updatedEmployee);
 
     }
-
-    //6 Get sorted employee based on any field
-    @GetMapping("sorted")
-    public List<EmployeeDto> getSortedEmployees(@RequestParam String sortBy, @RequestParam String sortDir) {
-        return employeeService.fetchSortedEmployeesByAnyField(sortBy, sortDir);
-    }
-
-
 }
