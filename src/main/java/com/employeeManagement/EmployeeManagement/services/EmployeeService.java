@@ -9,14 +9,18 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    ResponseEntity<EmployeeDto> getAllEmployees();
+    ResponseEntity<EmployeeDto> addEmployee();
 
-    String addEmployee();
-    List<EmployeeDto> getAllEmployee();
-    EmployeeDto getEmployeeById(int empId);
-    String deleteEmployee(int empId);
+    ResponseEntity<List<EmployeeDto>> getAllEmployee();
+
+
+    ResponseEntity<EmployeeDto> getEmployeeById(int empId);
+
+    ResponseEntity<String> deleteEmployee(int empId);
+
     List<EmployeeDto> fetchSortedEmployeesById(String sortDir);
-    List<EmployeeDto> fetchSortedEmployeesByAnyField(String sortBy,String sortDir);
+
+    List<EmployeeDto> fetchSortedEmployeesByAnyField(String sortBy, String sortDir);
 
 
 }

@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 public class Employee {
 
     @Id
-    private int empId;
+    private Integer empId;
     private String empName;
     private String designation;
     private String location;
-    private int salary;
+    private Integer salary;
 
 
 }
