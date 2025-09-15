@@ -6,15 +6,21 @@ import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundExce
 import com.employeeManagement.EmployeeManagement.model.entities.Employee;
 import com.employeeManagement.EmployeeManagement.repositories.EmployeeRepository;
 import com.employeeManagement.EmployeeManagement.services.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.sound.midi.Soundbank;
+import java.security.Key;
 import java.util.*;
 
 @Service
@@ -40,24 +46,28 @@ public class EmployeeServiceImpl {
     }
 
     // 2 Get all employee
-    public List<EmployeeDto> getAllEmployee(String sortBy, String sortDir) {
-        List<String> allowedFields = List.of("empId", "empName", "salary");
-        if (!allowedFields.contains(sortBy)) {
-            throw new IllegalArgumentException("Invalid sort field for sorting :" + sortBy);
+    public List<EmployeeDto> getAllEmployee(String sortBy, String sortDir, int pageNo, int pageSize) {
+        List<Employee> employeeList;
+        if (sortBy != null) {
+//            try to do using enum
+            List<String> allowedFields = List.of("empId", "empName", "salary");
+            if (!allowedFields.contains(sortBy)) {
+                throw new IllegalArgumentException("Invalid sort field for sorting :" + sortBy);
+            }
+            Sort.Direction direction = (sortDir.equalsIgnoreCase("desc")) ? Sort.Direction.DESC : Sort.Direction.ASC;
+            Sort sort = Sort.by(direction, sortBy);
+            Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+            Page<Employee> employeePage = employeeRepository.findAll(pageable);
+            employeeList = employeePage.getContent();
+            System.out.println("Sorting object create" + sort.toString().getClass());
+
+        } else {
+            //without sorting+pagination
+            employeeList = employeeRepository.findAll();
         }
-        Sort.Direction direction = (sortDir.equalsIgnoreCase("desc")) ? Sort.Direction.DESC : Sort.Direction.ASC;
-//        Sort.Direction direction =Sort.Direction.ASC;
-//        if (sortDir.equalsIgnoreCase("desc")) {
-//            direction = Sort.Direction.DESC;
-//        }
-        Sort sort = Sort.by(direction, sortBy);
-        System.out.println("Sorting object create" + sort.toString().getClass());
-        List<Employee> list = employeeRepository.findAll(sort);
-        if (list.isEmpty()) {
-            throw new ResourceNotFoundException("No employee found : Empty Table");
-        }
+
         List<EmployeeDto> employeeDtoList = new ArrayList<>();
-        for (Employee e : list) {
+        for (Employee e : employeeList) {
             employeeDtoList.add(modelMapper.map(e, EmployeeDto.class));
         }
         return employeeDtoList;
@@ -92,6 +102,32 @@ public class EmployeeServiceImpl {
 
         return modelMapper.map(updatedEmployee, EmployeeDto.class);
     }
+
+    //6 PATCH
+    public EmployeeDto updatePartialEmployee(Integer empId, Map<String, Object> updates) {
+        Employee existingEmployee = employeeRepository.findById(empId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee with id: " + empId + " is not found"));
+        System.out.println("Existing emp name " + existingEmployee.getEmpName());
+        updates.forEach((key, value) -> {
+            if (key.equalsIgnoreCase("empName")) {
+                existingEmployee.setEmpName((String) value);
+            }
+            if (key.equalsIgnoreCase("designation")) {
+                existingEmployee.setDesignation((String) value);
+            }
+            if (key.equalsIgnoreCase("location")) {
+                existingEmployee.setLocation((String) value);
+            }
+            if (key.equalsIgnoreCase("salary")) {
+                existingEmployee.setSalary((Integer) value);
+            }
+
+        });
+        Employee partialUpdatedEmployee = employeeRepository.save(existingEmployee);
+        System.out.println("Updated name : " + partialUpdatedEmployee.getEmpName());
+        return modelMapper.map(partialUpdatedEmployee, EmployeeDto.class);
+    }
+
 
 }
 
