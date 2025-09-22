@@ -1,4 +1,4 @@
-package com.employeeManagement.EmployeeManagement.dto;
+package com.employeeManagement.EmployeeManagement.dto.requests;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class EmployeeDto {
-
-    @NotNull(message = "Employee Id is required")
-    private Integer empId;
 
     @NotBlank(message = "Name is mandatory")
     private String empName;

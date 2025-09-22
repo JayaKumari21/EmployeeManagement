@@ -1,6 +1,8 @@
 package com.employeeManagement.EmployeeManagement.controllers;
 
-import com.employeeManagement.EmployeeManagement.dto.EmployeeDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.EmployeeDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.QueryParamsDto;
+import com.employeeManagement.EmployeeManagement.dto.responses.EmployeeResponseDto;
 import com.employeeManagement.EmployeeManagement.services.impl.EmployeeServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -26,14 +28,14 @@ public class EmployeeController {
 
     // 1 Add employee
     @PostMapping()
-    public ResponseEntity<EmployeeDto> addEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
-        EmployeeDto savedEmployee = employeeService.addEmployee(employeeDto);
+    public ResponseEntity<EmployeeResponseDto> createEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
+        EmployeeResponseDto savedEmployee = employeeService.addEmployee(employeeDto);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
     //2 Get all employee
     //filter+MultiAttribute filter
-    @GetMapping()
+   /* @GetMapping()
     public ResponseEntity<List<EmployeeDto>> getAll(
             @RequestParam(value = "pageNo", required = false, defaultValue = "0") int pageNo,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
@@ -42,13 +44,20 @@ public class EmployeeController {
         System.out.println("Value of sortBy in controller : " + sortBy);
         List<EmployeeDto> employeeDtoList = employeeService.getAllEmployee(sortBy, sortDir, pageNo, pageSize);
         return new ResponseEntity<>(employeeDtoList, HttpStatus.OK);
+    }*/
+
+    @GetMapping()
+    public ResponseEntity<List<EmployeeResponseDto>> getAll(@Valid @ModelAttribute QueryParamsDto queryParamsDto) {
+        List<EmployeeResponseDto> employeeResponseDto = employeeService.getAllEmployee(queryParamsDto);
+
+        return new ResponseEntity<>(employeeResponseDto, HttpStatus.OK);
     }
 
     //3 Get Employee by id
     @GetMapping("/{empId}")
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable int empId) {
-        EmployeeDto employeeDto = employeeService.getEmployeeById(empId);
-        return ResponseEntity.ok(employeeDto);
+    public ResponseEntity<EmployeeResponseDto> getEmployeeById(@PathVariable int empId) {
+        EmployeeResponseDto employeeResponseDto = employeeService.getEmployeeById(empId);
+        return ResponseEntity.ok(employeeResponseDto);
     }
 
     //4 Delete Employee by id

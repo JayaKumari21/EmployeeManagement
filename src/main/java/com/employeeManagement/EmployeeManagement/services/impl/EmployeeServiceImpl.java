@@ -1,27 +1,22 @@
 package com.employeeManagement.EmployeeManagement.services.impl;
 
-import com.employeeManagement.EmployeeManagement.dto.EmployeeDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.EmployeeDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.QueryParamsDto;
+import com.employeeManagement.EmployeeManagement.dto.responses.EmployeeResponseDto;
 import com.employeeManagement.EmployeeManagement.exceptions.DuplicateEmployeeException;
 import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundException;
 import com.employeeManagement.EmployeeManagement.model.entities.Employee;
 import com.employeeManagement.EmployeeManagement.repositories.EmployeeRepository;
-import com.employeeManagement.EmployeeManagement.services.EmployeeService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.sound.midi.Soundbank;
-import java.security.Key;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,54 +25,52 @@ public class EmployeeServiceImpl {
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
 
-//    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-//        this.employeeRepository = employeeRepository;
-//    }
+
+    //Create Pageable object
+    private Pageable buildPageableObj(QueryParamsDto queryParamsDto) {
+
+        if (queryParamsDto.getSortBy() != null) {
+            Sort sort = Sort.by(queryParamsDto.getSortDir() == null ?
+                            Sort.Direction.ASC :
+                            Sort.Direction.valueOf(queryParamsDto.getSortDir().name()),
+                    queryParamsDto.getSortBy().getFieldName()
+            );
+            Pageable pageable = PageRequest.of(
+                    queryParamsDto.getPageNo(),
+                    queryParamsDto.getPageSize(), sort
+            );
+            return pageable;
+        }
+        return PageRequest.of(queryParamsDto.getPageNo(),
+                queryParamsDto.getPageSize());
+    }
 
 
     //1 Adding/inserting
-    public EmployeeDto addEmployee(EmployeeDto employeeDto) {
-        if (employeeRepository.findById(employeeDto.getEmpId()).isPresent()) {
-            throw new DuplicateEmployeeException("Employee with id " + employeeDto.getEmpId() + " already present");
-        }
+    public EmployeeResponseDto addEmployee(EmployeeDto employeeDto) {
         Employee employee = modelMapper.map(employeeDto, Employee.class);
         Employee savedEmployee = employeeRepository.save(employee);
-        return modelMapper.map(savedEmployee, EmployeeDto.class);
+        return modelMapper.map(savedEmployee, EmployeeResponseDto.class);
     }
 
     // 2 Get all employee
-    public List<EmployeeDto> getAllEmployee(String sortBy, String sortDir, int pageNo, int pageSize) {
-        List<Employee> employeeList;
-        if (sortBy != null) {
-//            try to do using enum
-            List<String> allowedFields = List.of("empId", "empName", "salary");
-            if (!allowedFields.contains(sortBy)) {
-                throw new IllegalArgumentException("Invalid sort field for sorting :" + sortBy);
-            }
-            Sort.Direction direction = (sortDir.equalsIgnoreCase("desc")) ? Sort.Direction.DESC : Sort.Direction.ASC;
-            Sort sort = Sort.by(direction, sortBy);
-            Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
-            Page<Employee> employeePage = employeeRepository.findAll(pageable);
-            employeeList = employeePage.getContent();
-            System.out.println("Sorting object create" + sort.toString().getClass());
+    public List<EmployeeResponseDto> getAllEmployee(QueryParamsDto queryParamsDto) {
+        Pageable pageable = buildPageableObj(queryParamsDto);
+        Page<Employee> employeePage = employeeRepository.findAll(pageable);
 
-        } else {
-            //without sorting+pagination
-            employeeList = employeeRepository.findAll();
-        }
+        List<Employee> employeeList = employeePage.getContent();
 
-        List<EmployeeDto> employeeDtoList = new ArrayList<>();
-        for (Employee e : employeeList) {
-            employeeDtoList.add(modelMapper.map(e, EmployeeDto.class));
-        }
-        return employeeDtoList;
+        return employeeList.stream()
+                .map((e) -> modelMapper.map(e, EmployeeResponseDto.class))
+                .collect(Collectors.toList());
+
     }
 
     // 3 Get employee by id
-    public EmployeeDto getEmployeeById(Integer empId) {
+    public EmployeeResponseDto getEmployeeById(Integer empId) {
         Employee employee = employeeRepository.findById(empId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee with id " + empId + " is not found"));
-        return modelMapper.map(employee, EmployeeDto.class);
+        return modelMapper.map(employee, EmployeeResponseDto.class);
     }
 
 
