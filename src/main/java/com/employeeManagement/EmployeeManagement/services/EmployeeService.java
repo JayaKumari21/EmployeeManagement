@@ -1,19 +1,28 @@
 package com.employeeManagement.EmployeeManagement.services;
 
 
-import com.employeeManagement.EmployeeManagement.dto.EmployeeDto;
-import com.employeeManagement.EmployeeManagement.model.entities.Employee;
-import org.springframework.http.ResponseEntity;
+import com.employeeManagement.EmployeeManagement.dto.requests.EmployeeDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.QueryParamsDto;
+import com.employeeManagement.EmployeeManagement.dto.responses.EmployeeResponseDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeService {
 
-    ResponseEntity<EmployeeDto> getAllEmployees();
+    EmployeeResponseDto addEmployee(EmployeeDto employeeDto);
 
-    String addEmployee();
-    List<EmployeeDto> getAllEmployee();
-    EmployeeDto getEmployeeById(int empId);
-    String deleteEmployee(int empId);
+    List<EmployeeResponseDto> getAllEmployee(QueryParamsDto queryParamsDto);
 
+
+    EmployeeResponseDto getEmployeeById(Integer empId);
+
+    String deleteEmployee(Integer empId);
+
+
+//    ResponseEntity<EmployeeDto> updatePartialEmployee(Integer empId, Map<String, Object> updates);
+
+    EmployeeDto updateEmployee(Integer empId, EmployeeDto employeeDto);
+
+    EmployeeDto updatePartialEmployee(Integer empId, Map<String, Object> updates);
 }
