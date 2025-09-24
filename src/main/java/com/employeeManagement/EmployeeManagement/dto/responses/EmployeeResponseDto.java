@@ -1,7 +1,9 @@
 package com.employeeManagement.EmployeeManagement.dto.responses;
 
 import lombok.Data;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -13,7 +15,7 @@ public class EmployeeResponseDto {
     private String designation;
     private String location;
     private Integer salary;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 }

@@ -3,7 +3,8 @@ package com.employeeManagement.EmployeeManagement.enums;
 import java.lang.reflect.Field;
 
 public enum SortBy {
-    EMP_Id("empId"),
+    EMP_NAME("empName"),
+    EMP_ID("empId"),
     SALARY("salary"),
     LOCATION("location"),
     DESIGNATION("designation");
