@@ -2,9 +2,11 @@ package com.employeeManagement.EmployeeManagement.advices;
 
 import com.employeeManagement.EmployeeManagement.exceptions.DuplicateEmployeeException;
 import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -79,6 +81,31 @@ public class GlobalExceptionHandler {
                 .errorMessage("Input validation failed")
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .subError(Collections.singletonList(ex.getMessage()))
+                .build();
+        return buildApiResponse(apiError);
+    }
+
+    // Catch Jackson wrapper for unknown fields
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<?>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        Throwable cause = ex.getCause();
+        if (cause instanceof UnrecognizedPropertyException) {
+            UnrecognizedPropertyException upe = (UnrecognizedPropertyException) cause;
+            String message = String.format("Unknown field '%s' in request", upe.getPropertyName());
+
+            ApiError apiError = ApiError.builder()
+                    .httpStatusCode(HttpStatus.BAD_REQUEST)
+                    .errorMessage("Input validation failed")
+                    .subError(List.of(message))
+                    .build();
+            return buildApiResponse(apiError);
+        }
+
+        // fallback for other parse errors
+        ApiError apiError = ApiError.builder()
+                .httpStatusCode(HttpStatus.BAD_REQUEST)
+                .errorMessage("Malformed JSON request")
+                .subError(List.of(ex.getMessage()))
                 .build();
         return buildApiResponse(apiError);
     }
