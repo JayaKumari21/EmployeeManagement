@@ -9,16 +9,16 @@ public enum SortBy {
     LOCATION("location"),
     DESIGNATION("designation");
 
-    private final String fieldName;
+    private final String field;
 
     //can use lombok annotation instead
-    SortBy(String fieldName) {
-        this.fieldName = fieldName;
+    SortBy(String field) {
+        this.field = field;
     }
 
     //can use lombok annotation instead
     public String getFieldName() {
-        return fieldName;
+        return field;
     }
 
 

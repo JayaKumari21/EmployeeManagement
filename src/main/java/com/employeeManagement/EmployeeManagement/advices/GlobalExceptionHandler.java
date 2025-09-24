@@ -2,12 +2,17 @@ package com.employeeManagement.EmployeeManagement.advices;
 
 import com.employeeManagement.EmployeeManagement.exceptions.DuplicateEmployeeException;
 import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundException;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,21 +43,35 @@ public class GlobalExceptionHandler {
         return buildApiResponse(apiError);
     }
 
+    //enum + validation failed
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<?>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ApiResponse<?>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> subErrors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                .map(error -> {
+                    // Handle enum conversion errors
+                    if (error.contains(TypeMismatchException.class)) {
+                        Object rejectedValue = error.getRejectedValue();
+                        Class<?> targetType = error.unwrap(TypeMismatchException.class).getRequiredType();
+                        if (targetType != null && targetType.isEnum()) {
+                            return error.getField() + ": Invalid value '" + rejectedValue +
+                                    "'. Allowed values are: " + Arrays.toString(targetType.getEnumConstants());
+                        }
+                    }
+                    return error.getField() + ": " + error.getDefaultMessage();
+                })
                 .collect(Collectors.toList());
-        System.out.println(ex.getMessage());
+
         ApiError apiError = ApiError.builder()
-                .errorMessage("Input validation failed")
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
+                .errorMessage("Input validation failed")
                 .subError(subErrors)
                 .build();
         return buildApiResponse(apiError);
     }
+
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiResponse<?>> handleIllegalArgumentException(IllegalArgumentException ex) {
@@ -64,7 +83,6 @@ public class GlobalExceptionHandler {
         return buildApiResponse(apiError);
     }
 
-    
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> handleGenericException(Exception ex) {
 
