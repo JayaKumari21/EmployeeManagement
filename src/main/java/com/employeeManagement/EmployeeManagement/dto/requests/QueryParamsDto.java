@@ -18,8 +18,8 @@ public class QueryParamsDto {
     private int pageSize = 10;
 
 
-//    private String location;
-//    private String designation;
+    private String location;
+    private String designation;
 
     private SortBy sortBy;
     private SortDir sortDir;

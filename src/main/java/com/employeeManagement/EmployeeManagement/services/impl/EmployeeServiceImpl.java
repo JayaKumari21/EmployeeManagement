@@ -7,12 +7,14 @@ import com.employeeManagement.EmployeeManagement.exceptions.DuplicateEmployeeExc
 import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundException;
 import com.employeeManagement.EmployeeManagement.model.entities.Employee;
 import com.employeeManagement.EmployeeManagement.repositories.EmployeeRepository;
+import com.employeeManagement.EmployeeManagement.specifications.EmployeeSpecification;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -46,17 +48,19 @@ public class EmployeeServiceImpl {
     }
 
 
-    //1 Adding/inserting
-    public EmployeeResponseDto addEmployee(EmployeeDto employeeDto) {
-        Employee employee = modelMapper.map(employeeDto, Employee.class);
-        Employee savedEmployee = employeeRepository.save(employee);
-        return modelMapper.map(savedEmployee, EmployeeResponseDto.class);
-    }
-
-    // 2 Get all employee
+    // 1 Get all employee
     public List<EmployeeResponseDto> getAllEmployee(QueryParamsDto queryParamsDto) {
         Pageable pageable = buildPageableObj(queryParamsDto);
-        Page<Employee> employeePage = employeeRepository.findAll(pageable);
+//        Specification<Employee> specification = Specification.anyOf(
+//                EmployeeSpecification.hasDesignation(queryParamsDto.getDesignation()),
+//                EmployeeSpecification.hasLocation((queryParamsDto.getLocation())));
+
+        Specification<Employee> specification = Specification.allOf(
+                EmployeeSpecification.hasField("location", queryParamsDto.getLocation()),
+                EmployeeSpecification.hasField("designation", queryParamsDto.getDesignation()));
+
+
+        Page<Employee> employeePage = employeeRepository.findAll(specification, pageable);
 
         List<Employee> employeeList = employeePage.getContent();
 
@@ -66,11 +70,18 @@ public class EmployeeServiceImpl {
 
     }
 
-    // 3 Get employee by id
+    //2 Get employee by id
     public EmployeeResponseDto getEmployeeById(Integer empId) {
         Employee employee = employeeRepository.findById(empId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee with id " + empId + " is not found"));
         return modelMapper.map(employee, EmployeeResponseDto.class);
+    }
+
+    //3 Adding/inserting
+    public EmployeeResponseDto addEmployee(EmployeeDto employeeDto) {
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return modelMapper.map(savedEmployee, EmployeeResponseDto.class);
     }
 
 
