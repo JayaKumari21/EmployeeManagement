@@ -27,6 +27,12 @@ public class EmployeeServiceImpl {
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
 
+    //find employee by id
+    private Employee findEmployeeById(Integer empId) {
+        return employeeRepository.findById(empId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee with id : " + empId + " is not found"));
+
+    }
 
     //Create Pageable object
     private Pageable buildPageableObj(QueryParamsDto queryParamsDto) {
@@ -49,7 +55,17 @@ public class EmployeeServiceImpl {
 
 
     // 1 Get all employee
-    public List<EmployeeResponseDto> getAllEmployee(QueryParamsDto queryParamsDto) {
+    public List<EmployeeResponseDto> getAllEmployee(QueryParamsDto queryParamsDto) throws Exception {
+        if (queryParamsDto.getStartTime() == null) {
+            if (queryParamsDto.getEndTime() != null) {
+                throw new Exception("Start time is missing");
+            }
+        } else {
+            if (queryParamsDto.getEndTime() == null) {
+                throw new Exception("End time is missing");
+            }
+
+        }
         Pageable pageable = buildPageableObj(queryParamsDto);
 //        Specification<Employee> specification = Specification.anyOf(
 //                EmployeeSpecification.hasDesignation(queryParamsDto.getDesignation()),
@@ -57,8 +73,14 @@ public class EmployeeServiceImpl {
 
         Specification<Employee> specification = Specification.allOf(
                 EmployeeSpecification.hasField("location", queryParamsDto.getLocation()),
-                EmployeeSpecification.hasField("designation", queryParamsDto.getDesignation()));
+                EmployeeSpecification.hasField("designation", queryParamsDto.getDesignation()),
+                EmployeeSpecification.containsPattern("empName", queryParamsDto.getEmpName()),
+                EmployeeSpecification.greaterThanNum("salary", queryParamsDto.getSalary()),
+                EmployeeSpecification.valueBetween("createdAt", queryParamsDto.getStartTime(), queryParamsDto.getEndTime()));
 
+
+        // where location='mumbai'
+        // where location ='mumnao or disc = sde'
 
         Page<Employee> employeePage = employeeRepository.findAll(specification, pageable);
 
@@ -72,8 +94,7 @@ public class EmployeeServiceImpl {
 
     //2 Get employee by id
     public EmployeeResponseDto getEmployeeById(Integer empId) {
-        Employee employee = employeeRepository.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee with id " + empId + " is not found"));
+        Employee employee = findEmployeeById(empId);
         return modelMapper.map(employee, EmployeeResponseDto.class);
     }
 
@@ -87,24 +108,21 @@ public class EmployeeServiceImpl {
 
     //4 Delete Employee by id
     public String deleteEmployeeById(Integer empId) {
-        employeeRepository.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee with id " + empId + " is not found"));
+        findEmployeeById(empId);
         employeeRepository.deleteById(empId);
         return "Employee Deleted successfully";
     }
 
 
     //5 PUT full updation
-    public EmployeeDto updateEmployee(Integer empId, EmployeeDto employeeDto) {
-        Employee existingEmployee = employeeRepository.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee with id: " + empId + " is not found"));
-        existingEmployee.setDesignation(employeeDto.getDesignation());
-        existingEmployee.setLocation(employeeDto.getLocation());
-        existingEmployee.setSalary(employeeDto.getSalary());
-        existingEmployee.setEmpName(employeeDto.getEmpName());
+    public EmployeeResponseDto updateEmployee(Integer empId, EmployeeDto employeeDto) {
+        Employee existingEmployee = findEmployeeById(empId);
+        modelMapper.map(employeeDto, existingEmployee);
+//        Employee incomingEmployee = modelMapper.map(employeeDto, Employee.class);
+//        incomingEmployee.setEmpId(existingEmployee.getEmpId());
         Employee updatedEmployee = employeeRepository.save(existingEmployee);
 
-        return modelMapper.map(updatedEmployee, EmployeeDto.class);
+        return modelMapper.map(updatedEmployee, EmployeeResponseDto.class);
     }
 
     //6 PATCH

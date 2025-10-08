@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @RequiredArgsConstructor
 public class QueryParamsDto {
@@ -20,6 +22,11 @@ public class QueryParamsDto {
 
     private String location;
     private String designation;
+    private String empName;
+    private Integer salary;
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     private SortBy sortBy;
     private SortDir sortDir;

@@ -47,7 +47,7 @@ public class EmployeeController {
     }*/
 
     @GetMapping()
-    public ResponseEntity<List<EmployeeResponseDto>> getAll(@Valid @ModelAttribute QueryParamsDto queryParamsDto) {
+    public ResponseEntity<List<EmployeeResponseDto>> getAll(@Valid @ModelAttribute QueryParamsDto queryParamsDto) throws Exception {
         List<EmployeeResponseDto> employeeResponseDto = employeeService.getAllEmployee(queryParamsDto);
 
         return new ResponseEntity<>(employeeResponseDto, HttpStatus.OK);
@@ -69,8 +69,8 @@ public class EmployeeController {
 
     // 5 Put :- Full
     @PutMapping("/{empId}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Integer empId, @RequestBody EmployeeDto employeeDto) {
-        EmployeeDto updatedEmployee = employeeService.updateEmployee(empId, employeeDto);
+    public ResponseEntity<EmployeeResponseDto> updateEmployee(@PathVariable Integer empId, @Valid @RequestBody EmployeeDto employeeDto) {
+        EmployeeResponseDto updatedEmployee = employeeService.updateEmployee(empId, employeeDto);
         return ResponseEntity.ok(updatedEmployee);
     }
 

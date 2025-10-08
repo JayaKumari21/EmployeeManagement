@@ -16,7 +16,7 @@ public class EmployeeDto {
     @NotBlank(message = "Designation is mandatory")
     private String designation;
 
-    @NotBlank(message = "Location is mandatory")
+    //    @NotBlank(message = "Location is mandatory")
     private String location;
 
     @Min(value = 0, message = "Salary must be positive")

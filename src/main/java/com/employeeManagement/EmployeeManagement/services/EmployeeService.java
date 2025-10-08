@@ -22,7 +22,7 @@ public interface EmployeeService {
 
 //    ResponseEntity<EmployeeDto> updatePartialEmployee(Integer empId, Map<String, Object> updates);
 
-    EmployeeDto updateEmployee(Integer empId, EmployeeDto employeeDto);
+    EmployeeResponseDto updateEmployee(Integer empId, EmployeeDto employeeDto);
 
     EmployeeDto updatePartialEmployee(Integer empId, Map<String, Object> updates);
 }
