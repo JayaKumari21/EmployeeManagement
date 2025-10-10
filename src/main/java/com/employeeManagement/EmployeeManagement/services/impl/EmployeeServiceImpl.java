@@ -2,13 +2,14 @@ package com.employeeManagement.EmployeeManagement.services.impl;
 
 import com.employeeManagement.EmployeeManagement.dto.requests.EmployeeDto;
 import com.employeeManagement.EmployeeManagement.dto.requests.QueryParamsDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.UpdateEmployeeDto;
 import com.employeeManagement.EmployeeManagement.dto.responses.EmployeeResponseDto;
-import com.employeeManagement.EmployeeManagement.exceptions.DuplicateEmployeeException;
 import com.employeeManagement.EmployeeManagement.exceptions.ResourceNotFoundException;
 import com.employeeManagement.EmployeeManagement.model.entities.Employee;
 import com.employeeManagement.EmployeeManagement.repositories.EmployeeRepository;
 import com.employeeManagement.EmployeeManagement.specifications.EmployeeSpecification;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -126,28 +127,17 @@ public class EmployeeServiceImpl {
     }
 
     //6 PATCH
-    public EmployeeDto updatePartialEmployee(Integer empId, Map<String, Object> updates) {
-        Employee existingEmployee = employeeRepository.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee with id: " + empId + " is not found"));
+    public EmployeeResponseDto updatePartialEmployee(Integer empId, UpdateEmployeeDto updateEmployeeDto) {
+        Employee existingEmployee = findEmployeeById(empId);
         System.out.println("Existing emp name " + existingEmployee.getEmpName());
-        updates.forEach((key, value) -> {
-            if (key.equalsIgnoreCase("empName")) {
-                existingEmployee.setEmpName((String) value);
-            }
-            if (key.equalsIgnoreCase("designation")) {
-                existingEmployee.setDesignation((String) value);
-            }
-            if (key.equalsIgnoreCase("location")) {
-                existingEmployee.setLocation((String) value);
-            }
-            if (key.equalsIgnoreCase("salary")) {
-                existingEmployee.setSalary((Integer) value);
-            }
 
-        });
+        modelMapper.getConfiguration()
+                .setPropertyCondition(Conditions.isNotNull());
+        modelMapper.map(updateEmployeeDto, existingEmployee);
+
         Employee partialUpdatedEmployee = employeeRepository.save(existingEmployee);
         System.out.println("Updated name : " + partialUpdatedEmployee.getEmpName());
-        return modelMapper.map(partialUpdatedEmployee, EmployeeDto.class);
+        return modelMapper.map(partialUpdatedEmployee, EmployeeResponseDto.class);
     }
 
 

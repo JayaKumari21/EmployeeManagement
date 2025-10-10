@@ -3,6 +3,7 @@ package com.employeeManagement.EmployeeManagement.services;
 
 import com.employeeManagement.EmployeeManagement.dto.requests.EmployeeDto;
 import com.employeeManagement.EmployeeManagement.dto.requests.QueryParamsDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.UpdateEmployeeDto;
 import com.employeeManagement.EmployeeManagement.dto.responses.EmployeeResponseDto;
 
 import java.util.List;
@@ -24,5 +25,5 @@ public interface EmployeeService {
 
     EmployeeResponseDto updateEmployee(Integer empId, EmployeeDto employeeDto);
 
-    EmployeeDto updatePartialEmployee(Integer empId, Map<String, Object> updates);
+    EmployeeResponseDto updatePartialEmployee(Integer empId, UpdateEmployeeDto updateEmployeeDto);
 }

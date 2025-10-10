@@ -2,6 +2,7 @@ package com.employeeManagement.EmployeeManagement.controllers;
 
 import com.employeeManagement.EmployeeManagement.dto.requests.EmployeeDto;
 import com.employeeManagement.EmployeeManagement.dto.requests.QueryParamsDto;
+import com.employeeManagement.EmployeeManagement.dto.requests.UpdateEmployeeDto;
 import com.employeeManagement.EmployeeManagement.dto.responses.EmployeeResponseDto;
 import com.employeeManagement.EmployeeManagement.services.impl.EmployeeServiceImpl;
 import jakarta.validation.Valid;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -76,9 +76,9 @@ public class EmployeeController {
 
     // 6 Patch :- Partial
     @PatchMapping("/{id}")
-    public ResponseEntity<EmployeeDto> updatePartial(@PathVariable("id") Integer empId, @RequestBody Map<String, Object> updates) {
-        System.out.println("In controller " + updates.keySet());
-        EmployeeDto updateEmployeeDto = employeeService.updatePartialEmployee(empId, updates);
-        return ResponseEntity.ok(updateEmployeeDto);
+    public ResponseEntity<EmployeeResponseDto> updatePartial(@PathVariable("id") Integer empId, @Valid @RequestBody UpdateEmployeeDto updateEmployeeDto) {
+//        System.out.println("In controller " + updates.keySet());
+        EmployeeResponseDto updatedEmployee = employeeService.updatePartialEmployee(empId, updateEmployeeDto);
+        return ResponseEntity.ok(updatedEmployee);
     }
 }
