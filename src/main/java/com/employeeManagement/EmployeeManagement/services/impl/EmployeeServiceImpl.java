@@ -126,16 +126,30 @@ public class EmployeeServiceImpl {
         return modelMapper.map(updatedEmployee, EmployeeResponseDto.class);
     }
 
+    private Employee partialUpdation(UpdateEmployeeDto updateEmployeeDto, Employee existingEmployee) {
+        if (updateEmployeeDto.getDesignation() != null) {
+            existingEmployee.setDesignation(updateEmployeeDto.getDesignation());
+        }
+        if (updateEmployeeDto.getLocation() != null) {
+            existingEmployee.setLocation(updateEmployeeDto.getLocation());
+        }
+        if (updateEmployeeDto.getEmpName() != null) {
+            existingEmployee.setEmpName(updateEmployeeDto.getEmpName());
+        }
+        if (updateEmployeeDto.getSalary() != null) {
+            existingEmployee.setSalary(updateEmployeeDto.getSalary());
+        }
+
+        return existingEmployee;
+    }
+
     //6 PATCH
     public EmployeeResponseDto updatePartialEmployee(Integer empId, UpdateEmployeeDto updateEmployeeDto) {
         Employee existingEmployee = findEmployeeById(empId);
+        Employee partiallyUpdated = partialUpdation(updateEmployeeDto, existingEmployee);
         System.out.println("Existing emp name " + existingEmployee.getEmpName());
 
-        modelMapper.getConfiguration()
-                .setPropertyCondition(Conditions.isNotNull());
-        modelMapper.map(updateEmployeeDto, existingEmployee);
-
-        Employee partialUpdatedEmployee = employeeRepository.save(existingEmployee);
+        Employee partialUpdatedEmployee = employeeRepository.save(partiallyUpdated);
         System.out.println("Updated name : " + partialUpdatedEmployee.getEmpName());
         return modelMapper.map(partialUpdatedEmployee, EmployeeResponseDto.class);
     }
