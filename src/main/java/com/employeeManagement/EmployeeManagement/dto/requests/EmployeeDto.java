@@ -20,5 +20,5 @@ public class EmployeeDto {
     private String location;
 
     @Min(value = 0, message = "Salary must be positive")
-    private int salary;
+    private Integer salary;
 }
