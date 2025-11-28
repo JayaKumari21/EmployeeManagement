@@ -1,0 +1,94 @@
+<configuration>
+
+    <!-- ========== LOG PATTERN ========== -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+
+
+    <!-- ========== CONSOLE APPENDER (for local debugging) ========== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- ========== APPLICATION MAIN LOG (DAILY + SIZE BASED) ========== -->
+    <appender name="DAILY_APP_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Current day's log file -->
+        <file>logs/EmpApp.log</file>
+
+        <!-- Rolling policy -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- File will be created as EmpApp_yyyy-MM-dd.log -->
+            <fileNamePattern>logs/EmpApp_%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- Max days to keep logs -->
+            <maxHistory>30</maxHistory>
+
+            <!-- Total size cap -->
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <!-- ========== ERROR ONLY LOG FILE ========== -->
+    <appender name="ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/EmpApp_ERROR.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/EmpApp_ERROR_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+
+        <!-- Only ERROR logs go here -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+
+    <!-- ========== OPTIONAL JSON LOGGING (DISABLED BY DEFAULT) ========== -->
+    <!--
+    <appender name="JSON_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/EmpApp_JSON.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/EmpApp_JSON_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventEncoder"/>
+    </appender>
+    -->
+
+
+
+    <!-- ========== PACKAGE-SPECIFIC LOG LEVELS ========== -->
+    <logger name="com.employeeManagement" level="DEBUG" />
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.hibernate.SQL" level="INFO" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+
+
+
+    <!-- ========== ROOT LOGGER ========== -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DAILY_APP_LOG"/>
+        <appender-ref ref="ERROR_LOG"/>
+        <!-- <appender-ref ref="JSON_LOG"/>  Enable this if you want JSON logs -->
+    </root>
+
+</configuration>

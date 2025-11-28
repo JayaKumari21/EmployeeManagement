@@ -1,0 +1,208 @@
+2025-11-29 00:42:47 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-11-29 00:42:47 INFO  c.e.E.EmployeeManagementApplication - Starting EmployeeManagementApplication using Java 21.0.8 with PID 21580 (C:\Jaya\OfficeProject\EmployeeManagement\target\classes started by Jaya Kumari in C:\Jaya\OfficeProject\EmployeeManagement)
+2025-11-29 00:42:47 DEBUG c.e.E.EmployeeManagementApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-11-29 00:42:47 INFO  c.e.E.EmployeeManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-29 00:42:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-29 00:42:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 76 ms. Found 1 JPA repository interface.
+2025-11-29 00:42:50 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 00:42:50 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:42:50 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 00:42:50 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-29 00:42:50 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-29 00:42:50 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3211 ms
+2025-11-29 00:42:51 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-29 00:42:51 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-11-29 00:42:51 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-29 00:42:52 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-29 00:42:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-29 00:42:52 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4cf230bf
+2025-11-29 00:42:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-29 00:42:52 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-29 00:42:53 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-29 00:42:53 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:42:54 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-29 00:42:54 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-11-29 00:42:55 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@60cbba57, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@614d01b, org.springframework.security.web.context.SecurityContextHolderFilter@36a7586f, org.springframework.security.web.header.HeaderWriterFilter@18ed8b75, org.springframework.web.filter.CorsFilter@3be2ef56, org.springframework.security.web.csrf.CsrfFilter@7a8e484b, org.springframework.security.web.authentication.logout.LogoutFilter@42a198dd, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4e451f9a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@30b0d5a7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@40dd2cfe, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5a8149f6, org.springframework.security.web.access.ExceptionTranslationFilter@3a641f6, org.springframework.security.web.access.intercept.AuthorizationFilter@78d49939]
+2025-11-29 00:42:56 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:42:56 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 00:42:56 INFO  c.e.E.EmployeeManagementApplication - Started EmployeeManagementApplication in 9.942 seconds (process running for 10.56)
+2025-11-29 00:43:41 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 00:43:41 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 00:43:41 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2025-11-29 00:43:42 INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 00:43:42 DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 00:43:42 DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 00:43:42 DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 00:43:42 INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 00:44:48 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:44:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-11-29 00:44:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-11-29 00:44:53 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-11-29 00:44:53 INFO  c.e.E.EmployeeManagementApplication - Starting EmployeeManagementApplication using Java 21.0.8 with PID 19656 (C:\Jaya\OfficeProject\EmployeeManagement\target\classes started by Jaya Kumari in C:\Jaya\OfficeProject\EmployeeManagement)
+2025-11-29 00:44:53 DEBUG c.e.E.EmployeeManagementApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-11-29 00:44:53 INFO  c.e.E.EmployeeManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-29 00:44:55 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-29 00:44:55 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 1 JPA repository interface.
+2025-11-29 00:44:56 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 00:44:57 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:44:57 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 00:44:57 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-29 00:44:57 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-29 00:44:57 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3784 ms
+2025-11-29 00:44:57 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-29 00:44:57 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-11-29 00:44:57 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-29 00:44:58 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-29 00:44:58 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-29 00:44:58 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ae42248
+2025-11-29 00:44:58 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-29 00:44:58 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-29 00:45:00 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-29 00:45:00 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:45:01 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-29 00:45:01 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-11-29 00:45:01 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6ba516ff, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3bbb3c84, org.springframework.security.web.context.SecurityContextHolderFilter@6779959d, org.springframework.security.web.header.HeaderWriterFilter@31ecb361, org.springframework.web.filter.CorsFilter@769c80d1, org.springframework.security.web.csrf.CsrfFilter@4cb939d5, org.springframework.security.web.authentication.logout.LogoutFilter@2a5d9ede, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5a8149f6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@294c36b9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@779cda39, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3f0c2eff, org.springframework.security.web.access.ExceptionTranslationFilter@4265cbed, org.springframework.security.web.access.intercept.AuthorizationFilter@430dbcb0]
+2025-11-29 00:45:02 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:45:02 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 00:45:02 INFO  c.e.E.EmployeeManagementApplication - Started EmployeeManagementApplication in 10.562 seconds (process running for 11.66)
+2025-11-29 00:45:20 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 00:45:20 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 00:45:20 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-11-29 00:45:20 INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 00:45:20 DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 00:45:20 DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 00:45:20 DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 00:45:21 INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 00:54:03 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:54:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-11-29 00:54:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-11-29 00:54:06 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-11-29 00:54:06 [main] INFO  c.e.E.EmployeeManagementApplication - Starting EmployeeManagementApplication using Java 21.0.8 with PID 2596 (C:\Jaya\OfficeProject\EmployeeManagement\target\classes started by Jaya Kumari in C:\Jaya\OfficeProject\EmployeeManagement)
+2025-11-29 00:54:06 [main] DEBUG c.e.E.EmployeeManagementApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-11-29 00:54:06 [main] INFO  c.e.E.EmployeeManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-29 00:54:08 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-29 00:54:08 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 127 ms. Found 1 JPA repository interface.
+2025-11-29 00:54:09 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 00:54:09 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:54:09 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 00:54:09 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-29 00:54:10 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-29 00:54:10 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3319 ms
+2025-11-29 00:54:10 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-29 00:54:10 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-11-29 00:54:10 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-29 00:54:11 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-29 00:54:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-29 00:54:11 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@516c20de
+2025-11-29 00:54:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-29 00:54:11 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-29 00:54:13 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-29 00:54:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:54:14 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-29 00:54:14 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-11-29 00:54:14 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@407ff25f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ba8fbc8, org.springframework.security.web.context.SecurityContextHolderFilter@5d3f583d, org.springframework.security.web.header.HeaderWriterFilter@3ed2a30c, org.springframework.web.filter.CorsFilter@113a89c5, org.springframework.security.web.csrf.CsrfFilter@69fa5536, org.springframework.security.web.authentication.logout.LogoutFilter@5a8149f6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@53850535, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@22cca101, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@42a198dd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@55da6bf, org.springframework.security.web.access.ExceptionTranslationFilter@7bbe5548, org.springframework.security.web.access.intercept.AuthorizationFilter@292b7a02]
+2025-11-29 00:54:15 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:54:15 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 00:54:15 [main] INFO  c.e.E.EmployeeManagementApplication - Started EmployeeManagementApplication in 9.811 seconds (process running for 10.482)
+2025-11-29 00:54:52 [http-nio-8080-exec-6] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 00:54:52 [http-nio-8080-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 00:54:52 [http-nio-8080-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2025-11-29 00:54:53 [http-nio-8080-exec-6] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 00:54:53 [http-nio-8080-exec-6] DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 00:54:53 [http-nio-8080-exec-6] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 00:54:53 [http-nio-8080-exec-6] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 00:54:54 [http-nio-8080-exec-6] INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 00:57:00 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:57:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-11-29 00:57:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-11-29 00:57:04 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-11-29 00:57:04 [main] INFO  c.e.E.EmployeeManagementApplication - Starting EmployeeManagementApplication using Java 21.0.8 with PID 15948 (C:\Jaya\OfficeProject\EmployeeManagement\target\classes started by Jaya Kumari in C:\Jaya\OfficeProject\EmployeeManagement)
+2025-11-29 00:57:04 [main] DEBUG c.e.E.EmployeeManagementApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-11-29 00:57:04 [main] INFO  c.e.E.EmployeeManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-29 00:57:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-29 00:57:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 130 ms. Found 1 JPA repository interface.
+2025-11-29 00:57:08 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 00:57:08 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:57:08 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 00:57:08 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-29 00:57:08 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-29 00:57:08 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4170 ms
+2025-11-29 00:57:09 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-29 00:57:09 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-11-29 00:57:09 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-29 00:57:10 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-29 00:57:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-29 00:57:10 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62ab5e63
+2025-11-29 00:57:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-29 00:57:10 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-29 00:57:13 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-29 00:57:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 00:57:14 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-29 00:57:15 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-11-29 00:57:15 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b71a12e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@41c56930, org.springframework.security.web.context.SecurityContextHolderFilter@1ea78c72, org.springframework.security.web.header.HeaderWriterFilter@34f3c920, org.springframework.web.filter.CorsFilter@60660d21, org.springframework.security.web.csrf.CsrfFilter@3bfead8d, org.springframework.security.web.authentication.logout.LogoutFilter@1e60890c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@46059b73, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@42a198dd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c3f81ef, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2898c70d, org.springframework.security.web.access.ExceptionTranslationFilter@1722ede1, org.springframework.security.web.access.intercept.AuthorizationFilter@752e50c6]
+2025-11-29 00:57:16 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 00:57:16 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 00:57:16 [main] INFO  c.e.E.EmployeeManagementApplication - Started EmployeeManagementApplication in 13.919 seconds (process running for 15.142)
+2025-11-29 00:58:20 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 00:58:20 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 00:58:20 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-11-29 01:00:03 [http-nio-8080-exec-2] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 01:00:03 [http-nio-8080-exec-2] DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 01:00:03 [http-nio-8080-exec-2] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 01:00:03 [http-nio-8080-exec-2] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 01:00:04 [http-nio-8080-exec-2] INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 01:00:04 [http-nio-8080-exec-3] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 01:00:04 [http-nio-8080-exec-3] DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 01:00:04 [http-nio-8080-exec-3] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 01:00:04 [http-nio-8080-exec-3] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 01:00:04 [http-nio-8080-exec-3] INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 01:00:04 [http-nio-8080-exec-5] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 01:00:04 [http-nio-8080-exec-5] DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 01:00:04 [http-nio-8080-exec-5] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 01:00:04 [http-nio-8080-exec-5] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 01:00:04 [http-nio-8080-exec-5] INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 01:00:05 [http-nio-8080-exec-4] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee list with filters: QueryParamsDto(pageNo=0, pageSize=10, location=null, designation=null, empName=null, salary=null, startTime=null, endTime=null, sortBy=null, sortDir=null)
+2025-11-29 01:00:05 [http-nio-8080-exec-4] DEBUG c.e.E.s.impl.EmployeeServiceImpl - DEBUG log
+2025-11-29 01:00:05 [http-nio-8080-exec-4] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Building pageable object for pageNo: 0, pageSize: 10, sortBy: null, sortDir: null
+2025-11-29 01:00:05 [http-nio-8080-exec-4] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Executing database query for employee page
+2025-11-29 01:00:05 [http-nio-8080-exec-4] INFO  c.e.E.s.impl.EmployeeServiceImpl - Employee records fetched successfully. Total records: 9
+2025-11-29 01:00:42 [http-nio-8080-exec-9] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee by ID: 1
+2025-11-29 01:00:42 [http-nio-8080-exec-9] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Attempting to fetch employee with ID: 1
+2025-11-29 01:00:42 [http-nio-8080-exec-9] WARN  c.e.E.s.impl.EmployeeServiceImpl - Employee not found with id: 1
+2025-11-29 01:05:16 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 01:05:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-11-29 01:05:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-11-29 01:05:24 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-11-29 01:05:24 [main] INFO  c.e.E.EmployeeManagementApplication - Starting EmployeeManagementApplication using Java 21.0.8 with PID 18260 (C:\Jaya\OfficeProject\EmployeeManagement\target\classes started by Jaya Kumari in C:\Jaya\OfficeProject\EmployeeManagement)
+2025-11-29 01:05:24 [main] DEBUG c.e.E.EmployeeManagementApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-11-29 01:05:24 [main] INFO  c.e.E.EmployeeManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-29 01:05:26 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-29 01:05:26 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 204 ms. Found 1 JPA repository interface.
+2025-11-29 01:05:28 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 01:05:28 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 01:05:28 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 01:05:28 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-29 01:05:29 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-29 01:05:29 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4532 ms
+2025-11-29 01:05:29 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-29 01:05:30 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-11-29 01:05:30 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-29 01:05:31 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-29 01:05:31 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-29 01:05:31 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e01796a
+2025-11-29 01:05:31 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-29 01:05:31 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-29 01:05:33 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-29 01:05:33 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-29 01:05:34 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-29 01:05:34 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-11-29 01:05:35 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2898c70d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@ec67be1, org.springframework.security.web.context.SecurityContextHolderFilter@5924ea91, org.springframework.security.web.header.HeaderWriterFilter@1ea78c72, org.springframework.web.filter.CorsFilter@64a00fe0, org.springframework.security.web.csrf.CsrfFilter@38568876, org.springframework.security.web.authentication.logout.LogoutFilter@40aaf656, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2b71a12e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@709c6768, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b3284, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@347f0950, org.springframework.security.web.access.ExceptionTranslationFilter@73f0b216, org.springframework.security.web.access.intercept.AuthorizationFilter@51806858]
+2025-11-29 01:05:36 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 01:05:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 01:05:36 [main] INFO  c.e.E.EmployeeManagementApplication - Started EmployeeManagementApplication in 12.735 seconds (process running for 13.418)
+2025-11-29 01:05:43 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 01:05:43 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 01:05:43 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-29 01:05:44 [http-nio-8080-exec-2] INFO  c.e.E.s.impl.EmployeeServiceImpl - Fetching employee by ID: 1
+2025-11-29 01:05:44 [http-nio-8080-exec-2] DEBUG c.e.E.s.impl.EmployeeServiceImpl - Attempting to fetch employee with ID: 1
+2025-11-29 01:05:44 [http-nio-8080-exec-2] ERROR c.e.E.s.impl.EmployeeServiceImpl - Employee not found with id: 1
